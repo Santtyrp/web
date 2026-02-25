@@ -64,6 +64,8 @@
       --g4:#34d399;
       --ring: rgba(34,197,94,.18);
       --glass: rgba(255,255,255,.88);
+
+      --warn:#0b2a1f;
     }
 
     *{ box-sizing:border-box; }
@@ -82,6 +84,7 @@
     .reveal{ opacity:0; transform: translateY(10px); transition: opacity .55s ease, transform .55s ease; }
     .reveal.show{ opacity:1; transform: translateY(0); }
 
+    /* Header */
     .header{
       position:sticky; top:0; z-index:100;
       background: var(--glass);
@@ -123,6 +126,7 @@
       font-weight:900; cursor:pointer;
       transition: background .15s ease, transform .08s ease, box-shadow .15s ease, border-color .15s ease;
       box-shadow: 0 6px 16px rgba(10,10,12,.05);
+      user-select:none;
     }
     .btn:hover{ background:var(--soft); }
     .btn:active{ transform: translateY(1px); }
@@ -145,6 +149,7 @@
       border-color: rgba(34,197,94,.65);
     }
 
+    /* Hero */
     .hero{
       position:relative;
       min-height: calc(100vh - 72px);
@@ -180,6 +185,7 @@
     .card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius2); box-shadow: var(--shadow); padding:20px; }
     .card.soft{ background: var(--soft); box-shadow:none; }
 
+    /* Trust bar */
     .trustbar{ margin-top:14px; display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; }
     .trust{
       border:1px solid rgba(34,197,94,.18);
@@ -211,6 +217,7 @@
     .mini b{ font-size:13px; }
     .mini p{ margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.5; }
 
+    /* Mockup */
     .mockup{
       border:1px solid var(--line);
       border-radius: var(--radius2);
@@ -288,6 +295,7 @@
       100%{ transform: translateY(0); opacity:1; }
     }
 
+    /* Sections */
     .section{ padding:30px 0; }
     .section.alt{
       background: linear-gradient(180deg, #f7fbf9, #f6f7f9);
@@ -318,6 +326,7 @@
     .feature b{ display:block; font-size:14px; margin-bottom:6px; }
     .feature p{ margin:0; color:var(--muted); font-size:13px; line-height:1.55; }
 
+    /* Portfolio */
     .portfolio{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
     .work{
       border-radius:var(--radius2);
@@ -356,38 +365,21 @@
     .work-body p{ margin:0; color:var(--muted); font-size:13px; line-height:1.55; }
     .work-actions{ margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; }
 
-    .plans{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; align-items:stretch; }
-    .plan{
-      padding:18px;
-      border-radius:var(--radius2);
-      border:1px solid var(--line);
-      background:#fff;
+    /* Metrics / Cases */
+    .metrics{ display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:12px; }
+    .metric{
+      border:1px solid rgba(34,197,94,.18);
+      background: rgba(34,197,94,.06);
+      border-radius: var(--radius2);
       box-shadow: var(--shadow);
-      display:flex; flex-direction:column; gap:10px;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      padding:14px;
     }
-    .plan:hover{ transform: translateY(-2px); box-shadow: var(--shadow2); border-color: rgba(34,197,94,.24); }
-    .plan .head{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
-    .plan .name{ font-weight:900; font-size:15px; }
-    .plan .tag{
-      font-size:11px; font-weight:900; padding:6px 10px; border-radius:999px;
-      border:1px solid rgba(34,197,94,.28);
-      background: rgba(34,197,94,.10);
-      color:#0b2a1f;
-      white-space:nowrap;
-    }
-    .price{ font-size:26px; font-weight:900; letter-spacing:-0.4px; margin-top:2px; }
-    .plan .desc{ color:var(--muted); font-size:13px; line-height:1.55; margin-top:-2px; }
-    .ul{ margin:6px 0 0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.75; }
-    .plan .grow{ flex:1; }
-    .plan .btn{ width:100%; }
+    .metric .big{ font-size:26px; font-weight:900; letter-spacing:-.3px; color:#0b2a1f; }
+    .metric b{ display:block; margin-top:4px; font-size:13px; }
+    .metric p{ margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.45; }
 
-    .beforeAfter{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:12px;
-      align-items:stretch;
-    }
+    /* ✅ Antes / Después */
+    .beforeAfter{ display:grid; grid-template-columns: 1.1fr .9fr; gap:12px; align-items:stretch; }
     .baCard{
       border:1px solid var(--line);
       border-radius: var(--radius2);
@@ -420,10 +412,7 @@
         radial-gradient(320px 200px at 30% 35%, rgba(34,197,94,.18), transparent 62%),
         linear-gradient(180deg, #ffffff, #fafafa);
     }
-    .layer{
-      position:absolute; inset:0; padding:16px;
-      display:flex; gap:10px; align-items:stretch;
-    }
+    .layer{ position:absolute; inset:0; padding:16px; display:flex; gap:10px; align-items:stretch; }
     .fakeSite{
       flex:1;
       border-radius: 18px;
@@ -482,7 +471,36 @@
     .check b{ display:block; font-size:13px; }
     .check span{ display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.45; }
 
-    .contact-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; align-items:stretch; }
+    /* Plans */
+    .plans{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; align-items:stretch; }
+    .plan{
+      padding:18px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: var(--shadow);
+      display:flex; flex-direction:column; gap:10px;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .plan:hover{ transform: translateY(-2px); box-shadow: var(--shadow2); border-color: rgba(34,197,94,.24); }
+    .plan.featured{ border-color: rgba(34,197,94,.45); box-shadow: var(--shadow2); }
+    .plan .head{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+    .plan .name{ font-weight:900; font-size:15px; }
+    .plan .tag{
+      font-size:11px; font-weight:900; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(34,197,94,.28);
+      background: rgba(34,197,94,.10);
+      color:#0b2a1f;
+      white-space:nowrap;
+    }
+    .price{ font-size:28px; font-weight:900; letter-spacing:-0.4px; margin-top:2px; }
+    .plan .desc{ color:var(--muted); font-size:13px; line-height:1.55; margin-top:-2px; }
+    .ul{ margin:6px 0 0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.75; }
+    .plan .grow{ flex:1; }
+    .plan .btn{ width:100%; }
+
+    /* Calculator */
+    .calcGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; align-items:stretch; }
     .form{
       border:1px solid var(--line);
       border-radius: var(--radius2);
@@ -510,6 +528,75 @@
     textarea{ min-height:110px; resize:vertical; }
     .hint{ font-size:12px; color:var(--muted); line-height:1.5; margin-top:6px; }
 
+    .sum{
+      border:1px solid rgba(34,197,94,.20);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(34,197,94,.10), rgba(15,118,110,.06));
+      box-shadow: var(--shadow);
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .sum .line{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      color:var(--muted);
+      font-weight:900;
+      font-size:12px;
+      padding:8px 0;
+      border-bottom:1px dashed rgba(34,197,94,.25);
+    }
+    .sum .line:last-child{ border-bottom:none; }
+    .sum .total{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      color:#0b2a1f;
+    }
+    .sum .note{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    /* Guarantee */
+    .guarantee{
+      border:1px solid rgba(34,197,94,.22);
+      background: rgba(34,197,94,.06);
+      border-radius: var(--radius2);
+      padding:16px;
+      box-shadow: var(--shadow);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .shield{
+      width:46px;height:46px;border-radius:18px;
+      display:flex;align-items:center;justify-content:center;
+      background: rgba(34,197,94,.14);
+      border:1px solid rgba(34,197,94,.22);
+      font-size:18px;
+      flex: 0 0 auto;
+    }
+    .guarantee b{ display:block; font-size:14px; }
+    .guarantee p{ margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
+
+    /* FAQ */
+    .faq{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    details{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background:#fff;
+      padding:12px 14px;
+      box-shadow: var(--shadow);
+    }
+    summary{ cursor:pointer; font-weight:900; list-style:none; }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin:10px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
+
+    /* CTA box */
     .cta-box{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; flex-wrap:wrap; padding:18px;
@@ -533,6 +620,7 @@
       flex-wrap:wrap;
     }
 
+    /* WhatsApp float */
     .float{ position:fixed; right:16px; bottom:16px; z-index:120; }
     .float a{
       display:inline-flex; align-items:center; gap:10px;
@@ -555,10 +643,10 @@
       .trustbar{ grid-template-columns: 1fr; }
       .miniRow{ grid-template-columns: 1fr; }
       .mockGrid{ grid-template-columns: 1fr; }
-      .grid3, .portfolio, .plans{ grid-template-columns: 1fr; }
+      .grid3, .portfolio, .plans, .faq{ grid-template-columns: 1fr; }
       .beforeAfter{ grid-template-columns: 1fr; }
-      .contact-grid{ grid-template-columns: 1fr; }
-      .form .row{ grid-template-columns: 1fr; }
+      .calcGrid{ grid-template-columns: 1fr; }
+      .metrics{ grid-template-columns: 1fr 1fr; }
       h1{ font-size:34px; }
       .nav{ display:none; }
       .brand, .actions{ min-width:auto; }
@@ -566,6 +654,7 @@
       .scrollHint{ display:none; }
       .rangeWrap input[type="range"]{ width:160px; }
       .baStage{ height:300px; }
+      .form .row{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -585,8 +674,11 @@
         <nav class="nav" aria-label="Navegación">
           <a href="#servicios">Servicios</a>
           <a href="#portfolio">Demos</a>
+          <a href="#casos">Resultados</a>
           <a href="#antesdespues">Antes/Después</a>
           <a href="#planes">Planes</a>
+          <a href="#calculadora">Calculadora</a>
+          <a href="#faq">FAQ</a>
           <a href="#contacto">Contacto</a>
         </nav>
 
@@ -598,6 +690,7 @@
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="blob one"></div>
     <div class="blob two"></div>
@@ -617,7 +710,7 @@
           <div class="hero-cta">
             <a class="btn primary" id="ctaMain" href="#">Solicitar presupuesto</a>
             <a class="btn green previewBtn" href="#portfolio"><span class="spark"></span>Ver demos (pro)</a>
-            <a class="btn" href="#antesdespues">Ver antes/después</a>
+            <a class="btn" href="#calculadora">Calcular precio</a>
           </div>
 
           <div class="trustbar">
@@ -659,12 +752,14 @@
           <div class="card soft reveal" style="border-color: rgba(34,197,94,.20);">
             <h2 style="margin:0 0 8px; font-size:18px;">Resultados / Beneficios</h2>
             <p class="lead" style="margin:0 0 12px;">Estructura pensada para convertir visitas en consultas reales.</p>
+
             <div class="miniRow">
               <div class="mini"><b>Más consultas</b><p>CTA claro + WhatsApp en 1 toque.</p></div>
               <div class="mini"><b>Más confianza</b><p>Diseño sobrio estilo agencia.</p></div>
               <div class="mini"><b>Más orden</b><p>Productos y precios editables.</p></div>
               <div class="mini"><b>Menos errores</b><p>Conversión automática USD/ARS.</p></div>
             </div>
+
             <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
               <a class="btn green" id="ctaSide" href="#" style="flex:1;">Hablar por WhatsApp</a>
               <a class="btn" href="#planes" style="flex:1;">Ver planes</a>
@@ -681,22 +776,37 @@
     </div>
   </section>
 
+  <!-- SERVICIOS -->
   <section class="section alt" id="servicios">
     <div class="container">
       <h2 class="reveal">Servicios</h2>
       <p class="lead reveal">Diseño sobrio + estructura clara para convertir visitas en consultas.</p>
       <div class="grid3">
-        <div class="feature reveal"><div class="top"><span class="pill green">Web</span><span class="pill">Servicios</span></div><b>Web institucional</b><p>Presentación, servicios, ubicación y contacto para convertir.</p></div>
-        <div class="feature reveal"><div class="top"><span class="pill green">Catálogo</span><span class="pill">Ventas</span></div><b>Catálogo de productos</b><p>Categorías, promos y WhatsApp con mensaje automático.</p></div>
-        <div class="feature reveal"><div class="top"><span class="pill green">Admin</span><span class="pill">Panel</span></div><b>Panel tipo Excel</b><p>Alta/edición/baja en lista simple. Sin tocar el código.</p></div>
+        <div class="feature reveal">
+          <div class="top"><span class="pill green">Web</span><span class="pill">Servicios</span></div>
+          <b>Web institucional</b>
+          <p>Presentación, servicios, ubicación y contacto para convertir.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="top"><span class="pill green">Catálogo</span><span class="pill">Ventas</span></div>
+          <b>Catálogo de productos</b>
+          <p>Categorías, promos y WhatsApp con mensaje automático.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="top"><span class="pill green">Admin</span><span class="pill">Panel</span></div>
+          <b>Panel tipo Excel</b>
+          <p>Alta/edición/baja en lista simple. Sin tocar el código.</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- DEMOS -->
   <section class="section" id="portfolio">
     <div class="container">
       <h2 class="reveal">Trabajos / Demos</h2>
       <p class="lead reveal">Tres demos premium para mostrar el nivel real del servicio.</p>
+
       <div class="portfolio">
         <div class="work reveal">
           <div class="thumb">Demo · Servicios<div class="miniPreview"><span></span><span></span><span></span></div></div>
@@ -734,10 +844,64 @@
           </div>
         </div>
       </div>
+
+      <div class="cta-box reveal" style="margin-top:12px;">
+        <div>
+          <b>¿Querés que te arme una demo con tu rubro?</b>
+          <span>Ej: “Seguridad”, “Gastronomía”, “Indumentaria”, “Servicios”.</span>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn green" id="ctaDemoWhatsApp" href="#">Pedir demo por WhatsApp</a>
+          <a class="btn" href="#planes">Ver planes</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section alt" id="antesdespues">
+  <!-- RESULTADOS / CASOS -->
+  <section class="section alt" id="casos">
+    <div class="container">
+      <h2 class="reveal">Resultados que buscamos</h2>
+      <p class="lead reveal">No es “solo una web”: es una máquina de consultas con estructura clara.</p>
+
+      <div class="metrics">
+        <div class="metric reveal">
+          <div class="big">+30%</div>
+          <b>Más consultas</b>
+          <p>CTA + WhatsApp en el lugar correcto.</p>
+        </div>
+        <div class="metric reveal">
+          <div class="big">-50%</div>
+          <b>Menos ida y vuelta</b>
+          <p>Mensaje armado y secciones claras.</p>
+        </div>
+        <div class="metric reveal">
+          <div class="big">2 min</div>
+          <b>Editar precios</b>
+          <p>Panel tipo Excel sin tocar código.</p>
+        </div>
+        <div class="metric reveal">
+          <div class="big">Pro</div>
+          <b>Primera impresión</b>
+          <p>Diseño sobrio con identidad premium.</p>
+        </div>
+      </div>
+
+      <div class="guarantee reveal" style="margin-top:12px;">
+        <div class="shield">🛡️</div>
+        <div>
+          <b>Garantía de satisfacción (real)</b>
+          <p>
+            Te muestro un avance y lo ajustamos hasta que te cierre el diseño (tipografía, colores, secciones y detalles).
+            La idea es que te quede una web que puedas mostrar con orgullo y que te genere ventas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANTES / DESPUÉS -->
+  <section class="section" id="antesdespues">
     <div class="container">
       <h2 class="reveal">Antes / Después</h2>
       <p class="lead reveal">Un ejemplo visual de cómo cambia la percepción con un diseño profesional.</p>
@@ -800,73 +964,253 @@
 
           <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn green" href="#contacto" style="flex:1;">Quiero mi después</a>
-            <a class="btn" href="#portfolio" style="flex:1;">Ver demos</a>
+            <a class="btn" href="#calculadora" style="flex:1;">Calcular precio</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="planes">
+  <!-- PLANES: STANDARD / PLATINO / DIAMANTE -->
+  <section class="section alt" id="planes">
     <div class="container">
       <h2 class="reveal">Planes</h2>
-      <p class="lead reveal">Elegí una base y lo ajustamos a tu rubro.</p>
+      <p class="lead reveal">Precios llamativos pero rentables. Elegí un plan y lo adaptamos a tu rubro.</p>
 
       <div class="plans">
+
+        <!-- STANDARD -->
         <div class="plan reveal">
-          <div class="head"><div class="name">Web Básica</div><div class="tag">Presentación</div></div>
-          <div class="price">$120.000</div>
-          <div class="desc">Ideal para servicios y presencia profesional.</div>
-          <div class="grow">
-            <ul class="ul"><li>1 a 3 secciones</li><li>Botón WhatsApp</li><li>Diseño responsive</li><li>Ubicación y contacto</li></ul>
+          <div class="head">
+            <div class="name">Standard</div>
+            <div class="tag">Ideal para empezar</div>
           </div>
-          <button class="btn green contratar" data-plan="Web Básica">Contratar por WhatsApp</button>
+
+          <div class="price">$149.000</div>
+          <div class="desc">Para negocios que necesitan presencia profesional y más consultas por WhatsApp.</div>
+
+          <div class="grow">
+            <ul class="ul">
+              <li>Landing 1 página (secciones completas)</li>
+              <li>Botón WhatsApp + mensaje armado</li>
+              <li>Diseño premium (blanco/negro + verde)</li>
+              <li>Responsive (celular/PC)</li>
+              <li>SEO básico (títulos + descripción)</li>
+            </ul>
+          </div>
+
+          <button class="btn green contratar" data-plan="Standard ($149.000)">Contratar por WhatsApp</button>
         </div>
 
-        <div class="plan reveal">
-          <div class="head"><div class="name">Catálogo Pro</div><div class="tag">Recomendado</div></div>
-          <div class="price">$280.000</div>
-          <div class="desc">Perfecto para vender por Instagram/WhatsApp.</div>
-          <div class="grow">
-            <ul class="ul"><li>Productos ilimitados</li><li>Panel tipo Excel</li><li>Categorías y promos</li><li>WhatsApp automático</li></ul>
+        <!-- PLATINO -->
+        <div class="plan featured reveal">
+          <div class="head">
+            <div class="name">Platino</div>
+            <div class="tag">Más vendido</div>
           </div>
-          <button class="btn green contratar" data-plan="Catálogo Pro">Contratar por WhatsApp</button>
+
+          <div class="price">$299.000</div>
+          <div class="desc">Catálogo profesional con panel tipo Excel para editar productos y precios sin tocar código.</div>
+
+          <div class="grow">
+            <ul class="ul">
+              <li>Catálogo + categorías + promos</li>
+              <li>Panel admin tipo Excel (agregar/editar/eliminar)</li>
+              <li>WhatsApp automático por producto</li>
+              <li>Buscador de productos</li>
+              <li>SEO PRO (Open Graph + JSON-LD + sitemap)</li>
+            </ul>
+          </div>
+
+          <button class="btn green contratar" data-plan="Platino ($299.000)">Contratar por WhatsApp</button>
         </div>
 
+        <!-- DIAMANTE -->
         <div class="plan reveal">
-          <div class="head"><div class="name">Tienda Premium</div><div class="tag">Automatización</div></div>
-          <div class="price">$450.000</div>
-          <div class="desc">Para negocios que quieren escalar.</div>
-          <div class="grow">
-            <ul class="ul"><li>Admin completo</li><li>USD ⇄ ARS automático</li><li>Secciones ilimitadas</li><li>Optimización pro</li></ul>
+          <div class="head">
+            <div class="name">Diamante</div>
+            <div class="tag">Full ventas</div>
           </div>
-          <button class="btn green contratar" data-plan="Tienda Premium">Contratar por WhatsApp</button>
+
+          <div class="price">$549.000</div>
+          <div class="desc">Para negocios que quieren vender fuerte: panel completo + USD ⇄ ARS + optimización.</div>
+
+          <div class="grow">
+            <ul class="ul">
+              <li>Todo lo del Platino</li>
+              <li>Conversión automática USD ⇄ ARS (dólar oficial)</li>
+              <li>Optimización pro (velocidad + estructura)</li>
+              <li>Secciones ilimitadas (servicios/faq/galería)</li>
+              <li>Soporte + ajustes post entrega</li>
+            </ul>
+          </div>
+
+          <button class="btn green contratar" data-plan="Diamante ($549.000)">Contratar por WhatsApp</button>
+        </div>
+
+      </div>
+
+      <div class="card soft reveal" style="margin-top:12px;border-color: rgba(34,197,94,.18);">
+        <b style="display:block;margin-bottom:6px;">💡 Promo de cierre (para vender más rápido)</b>
+        <div style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+          <div>✅ <b>Seña 50%</b> para reservar fecha + <b>entrega rápida</b>.</div>
+          <div>✅ Incluye configuración de WhatsApp y textos base listos para publicar.</div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="btn green" href="#contacto" style="flex:1;">Quiero cotizar mi proyecto</a>
+          <a class="btn" id="ctaPlansWhatsApp" href="#" style="flex:1;">Hablar por WhatsApp</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section alt" id="contacto">
+  <!-- CALCULADORA -->
+  <section class="section" id="calculadora">
+    <div class="container">
+      <h2 class="reveal">Calculadora de precio</h2>
+      <p class="lead reveal">Elegí un plan + extras y te muestra el total. Después te arma el mensaje listo para WhatsApp.</p>
+
+      <div class="calcGrid">
+        <div class="form reveal">
+          <div class="field">
+            <label for="calcPlan">Plan</label>
+            <select id="calcPlan">
+              <option value="standard" selected>Standard ($149.000)</option>
+              <option value="platino">Platino ($299.000)</option>
+              <option value="diamante">Diamante ($549.000)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Extras (opcional)</label>
+            <div style="display:grid; gap:8px;">
+              <label style="display:flex;gap:10px;align-items:center; font-weight:900; color:var(--muted); font-size:12px;">
+                <input type="checkbox" class="calcExtra" value="seoPlus" />
+                SEO avanzado + mejoras de contenido (+$45.000)
+              </label>
+              <label style="display:flex;gap:10px;align-items:center; font-weight:900; color:var(--muted); font-size:12px;">
+                <input type="checkbox" class="calcExtra" value="copy" />
+                Textos pro (copy) para vender (+$35.000)
+              </label>
+              <label style="display:flex;gap:10px;align-items:center; font-weight:900; color:var(--muted); font-size:12px;">
+                <input type="checkbox" class="calcExtra" value="designPlus" />
+                Ajuste visual extra (branding + detalles) (+$40.000)
+              </label>
+              <label style="display:flex;gap:10px;align-items:center; font-weight:900; color:var(--muted); font-size:12px;">
+                <input type="checkbox" class="calcExtra" value="speed" />
+                Optimización extra de velocidad (+$35.000)
+              </label>
+              <label style="display:flex;gap:10px;align-items:center; font-weight:900; color:var(--muted); font-size:12px;">
+                <input type="checkbox" class="calcExtra" value="sections" />
+                Secciones extra (galería/faq/servicios extra) (+$25.000)
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="calcRubro">Rubro</label>
+            <input id="calcRubro" type="text" placeholder="Ej: Seguridad, Gastronomía, Indumentaria..." />
+          </div>
+
+          <div class="field">
+            <label for="calcNegocio">Nombre del negocio</label>
+            <input id="calcNegocio" type="text" placeholder="Ej: Mi Negocio" />
+          </div>
+
+          <button class="btn green" id="calcSend" type="button" style="width:100%; height:48px; border-radius:16px;">
+            Enviar presupuesto por WhatsApp
+          </button>
+
+          <div class="hint">Tip: si el cliente te dice “es caro”, ofrecé Standard y después upsell a Platino.</div>
+        </div>
+
+        <div class="sum reveal">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
+            <div>
+              <b style="display:block;">Resumen</b>
+              <div class="note">El total se actualiza automático.</div>
+            </div>
+            <span class="badge">Estimación</span>
+          </div>
+
+          <div class="line"><span>Plan</span><span id="sumPlan">$149.000</span></div>
+          <div class="line"><span>Extras</span><span id="sumExtras">$0</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:10px; padding-top:6px;">
+            <span style="font-weight:900; color:var(--muted);">Total</span>
+            <span class="total" id="sumTotal">$149.000</span>
+          </div>
+
+          <div class="note">
+            * El precio final puede variar si el proyecto incluye contenido especial (muchas páginas, sistema a medida, etc.).
+            Pero con esto cerrás 8/10 ventas sin vueltas.
+          </div>
+
+          <div class="guarantee" style="margin-top:8px;">
+            <div class="shield">✅</div>
+            <div>
+              <b>Revisión incluida</b>
+              <p>Incluye ajustes de diseño y textos base para que quede pro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt" id="faq">
+    <div class="container">
+      <h2 class="reveal">Preguntas frecuentes</h2>
+      <p class="lead reveal">Respuestas cortas para cerrar ventas rápido.</p>
+
+      <div class="faq">
+        <details class="reveal">
+          <summary>¿Qué incluye exactamente el “panel tipo Excel”?</summary>
+          <p>Un administrador simple donde agregás/editar/eliminás productos como una lista. Sin cuadros, sin complicaciones.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>¿La web funciona en celular?</summary>
+          <p>Sí. Todo es responsive y se ve perfecto en celular, tablet y PC.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>¿Cómo es el pago?</summary>
+          <p>Seña para reservar fecha + saldo al entregar. Si querés, también podés dividir en 2 partes.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>¿Puedo pedir cambios?</summary>
+          <p>Sí. Te muestro avances y lo ajustamos hasta que te guste (dentro del alcance del plan).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO + AGENDAR -->
+  <section class="section" id="contacto">
     <div class="container">
       <h2 class="reveal">Contacto</h2>
       <p class="lead reveal">Completá los datos y se abre WhatsApp con el mensaje armado.</p>
 
-      <div class="contact-grid">
+      <div class="calcGrid">
         <div class="form reveal">
           <form id="contactForm">
             <div class="row">
               <div class="field"><label for="nombre">Tu nombre</label><input id="nombre" type="text" placeholder="Ej: Juan Pérez" required /></div>
               <div class="field"><label for="rubro">Rubro</label><input id="rubro" type="text" placeholder="Ej: Seguridad / Gastronomía" required /></div>
             </div>
+
             <div class="row">
               <div class="field"><label for="negocio">Nombre del negocio</label><input id="negocio" type="text" placeholder="Ej: Mi Negocio" required /></div>
               <div class="field">
                 <label for="plan">Qué necesitás</label>
                 <select id="plan" required>
                   <option value="Consulta general">Consulta general</option>
-                  <option value="Web Básica">Web Básica</option>
-                  <option value="Catálogo Pro">Catálogo Pro</option>
-                  <option value="Tienda Premium">Tienda Premium</option>
+                  <option value="Standard">Standard</option>
+                  <option value="Platino">Platino</option>
+                  <option value="Diamante">Diamante</option>
                   <option value="Catálogo con USD ⇄ ARS automático">Catálogo con USD ⇄ ARS automático</option>
                 </select>
               </div>
@@ -884,22 +1228,50 @@
           </form>
         </div>
 
-        <div class="cta-box reveal">
+        <div class="sum reveal">
           <div>
-            <b>¿Preferís escribir directo?</b>
-            <span>Te abre WhatsApp con un mensaje listo.</span>
+            <b style="display:block;">Agendar llamada</b>
+            <div class="note">Elegí un horario y te armo el mensaje para coordinar.</div>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn green" id="ctaContact" href="#">Hablar por WhatsApp</a>
-            <a class="btn" href="#portfolio">Ver demos</a>
+
+          <div class="field">
+            <label for="callDay">Día</label>
+            <select id="callDay">
+              <option value="Hoy">Hoy</option>
+              <option value="Mañana">Mañana</option>
+              <option value="Esta semana">Esta semana</option>
+            </select>
           </div>
+
+          <div class="field">
+            <label for="callTime">Horario</label>
+            <select id="callTime">
+              <option value="10:00">10:00</option>
+              <option value="12:00">12:00</option>
+              <option value="16:00">16:00</option>
+              <option value="18:00">18:00</option>
+              <option value="20:00">20:00</option>
+            </select>
+          </div>
+
+          <button class="btn" id="callBtn" type="button" style="width:100%; height:48px; border-radius:16px;">
+            Agendar por WhatsApp
+          </button>
+
+          <div class="guarantee" style="margin-top:8px;">
+            <div class="shield">💬</div>
+            <div>
+              <b>Respuesta rápida</b>
+              <p>Te contesto y te paso la mejor opción según tu rubro.</p>
+            </div>
+          </div>
+
+          <footer style="margin-top:auto;">
+            <div>© <span id="year"></span> Santiago Rodriguez · Programación Web</div>
+            <div>San Vicente, Buenos Aires</div>
+          </footer>
         </div>
       </div>
-
-      <footer>
-        <div>© <span id="year"></span> Santiago Rodriguez · Programación Web</div>
-        <div>San Vicente, Buenos Aires</div>
-      </footer>
     </div>
   </section>
 
@@ -908,17 +1280,27 @@
   </div>
 
   <script>
+    // =========================
+    // WhatsApp
+    // =========================
     const WHATSAPP_NUMBER = "5491155034755";
     const wa = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 
     const generalMsg = "Hola Santiago! Quiero una página web. Mi rubro es: _____. Mi negocio se llama: _____.";
     const general = wa(generalMsg);
 
-    document.getElementById("headerWhatsApp").href = general;
-    document.getElementById("ctaMain").href = general;
-    document.getElementById("ctaSide").href = general;
-    document.getElementById("ctaContact").href = general;
-    document.getElementById("floatWhatsApp").href = general;
+    const byId = (id) => document.getElementById(id);
+
+    byId("headerWhatsApp").href = general;
+    byId("ctaMain").href = general;
+    byId("ctaSide").href = general;
+    const ctaDemo = byId("ctaDemoWhatsApp");
+    if (ctaDemo) ctaDemo.href = wa("Hola Santiago! Quiero una demo con mi rubro. Mi rubro es: _____. Mi negocio se llama: _____.");
+
+    byId("floatWhatsApp").href = general;
+
+    const ctaPlans = byId("ctaPlansWhatsApp");
+    if (ctaPlans) ctaPlans.href = general;
 
     document.querySelectorAll(".contratar").forEach(btn=>{
       btn.addEventListener("click", ()=>{
@@ -928,13 +1310,16 @@
       });
     });
 
-    document.getElementById("contactForm").addEventListener("submit", (e)=>{
+    // =========================
+    // Contact form
+    // =========================
+    byId("contactForm").addEventListener("submit", (e)=>{
       e.preventDefault();
-      const nombre = document.getElementById("nombre").value.trim();
-      const rubro = document.getElementById("rubro").value.trim();
-      const negocio = document.getElementById("negocio").value.trim();
-      const plan = document.getElementById("plan").value;
-      const detalle = document.getElementById("detalle").value.trim();
+      const nombre = byId("nombre").value.trim();
+      const rubro = byId("rubro").value.trim();
+      const negocio = byId("negocio").value.trim();
+      const plan = byId("plan").value;
+      const detalle = byId("detalle").value.trim();
 
       const msg =
         `Hola Santiago! Soy ${nombre}. Mi negocio es "${negocio}" (${rubro}). ` +
@@ -943,9 +1328,9 @@
       window.open(wa(msg), "_blank");
     });
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Reveal
+    // =========================
+    // Reveal on scroll
+    // =========================
     const els = Array.from(document.querySelectorAll(".reveal"));
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
@@ -957,16 +1342,106 @@
     }, { threshold: 0.12 });
     els.forEach(el=>io.observe(el));
 
+    // =========================
     // Antes/Después slider
-    const range = document.getElementById("baRange");
-    const beforeClip = document.getElementById("beforeClip");
-    const handle = document.getElementById("baHandle");
+    // =========================
+    const range = byId("baRange");
+    const beforeClip = byId("beforeClip");
+    const handle = byId("baHandle");
     function setBA(v){
       beforeClip.style.width = v + "%";
       handle.style.left = v + "%";
     }
     setBA(range.value);
     range.addEventListener("input", ()=> setBA(range.value));
+
+    // =========================
+    // Calculadora de precio
+    // =========================
+    const PRICES = {
+      standard: 149000,
+      platino: 299000,
+      diamante: 549000
+    };
+    const EXTRAS = {
+      seoPlus: 45000,
+      copy: 35000,
+      designPlus: 40000,
+      speed: 35000,
+      sections: 25000
+    };
+
+    const fmt = (n) => "$" + n.toLocaleString("es-AR");
+
+    const calcPlan = byId("calcPlan");
+    const sumPlan = byId("sumPlan");
+    const sumExtras = byId("sumExtras");
+    const sumTotal = byId("sumTotal");
+
+    function computeCalc(){
+      const planKey = calcPlan.value;
+      const base = PRICES[planKey] || 0;
+
+      let extrasTotal = 0;
+      const selectedExtras = [];
+      document.querySelectorAll(".calcExtra").forEach(chk=>{
+        if(chk.checked){
+          extrasTotal += EXTRAS[chk.value] || 0;
+          selectedExtras.push(chk.value);
+        }
+      });
+
+      sumPlan.textContent = fmt(base);
+      sumExtras.textContent = fmt(extrasTotal);
+      sumTotal.textContent = fmt(base + extrasTotal);
+
+      return { planKey, base, extrasTotal, total: base + extrasTotal, selectedExtras };
+    }
+
+    calcPlan.addEventListener("change", computeCalc);
+    document.querySelectorAll(".calcExtra").forEach(chk=> chk.addEventListener("change", computeCalc));
+    computeCalc();
+
+    byId("calcSend").addEventListener("click", ()=>{
+      const { planKey, total, selectedExtras } = computeCalc();
+      const rubro = (byId("calcRubro").value || "").trim() || "—";
+      const negocio = (byId("calcNegocio").value || "").trim() || "—";
+
+      const planName = planKey === "standard" ? "Standard" : (planKey === "platino" ? "Platino" : "Diamante");
+
+      const extrasLabelMap = {
+        seoPlus: "SEO avanzado",
+        copy: "Textos pro (copy)",
+        designPlus: "Ajuste visual extra",
+        speed: "Optimización extra velocidad",
+        sections: "Secciones extra"
+      };
+      const extrasText = selectedExtras.length
+        ? selectedExtras.map(k => extrasLabelMap[k] || k).join(", ")
+        : "Sin extras";
+
+      const msg =
+        `Hola Santiago! Quiero presupuesto.\n` +
+        `Negocio: ${negocio}\nRubro: ${rubro}\n` +
+        `Plan: ${planName}\nExtras: ${extrasText}\n` +
+        `Total estimado: ${fmt(total)}\n` +
+        `¿Cuándo podemos arrancar?`;
+
+      window.open(wa(msg), "_blank");
+    });
+
+    // =========================
+    // Agendar llamada
+    // =========================
+    byId("callBtn").addEventListener("click", ()=>{
+      const day = byId("callDay").value;
+      const time = byId("callTime").value;
+      const msg = `Hola Santiago! ¿Podemos coordinar una llamada? Me queda bien ${day} a las ${time}.`;
+      window.open(wa(msg), "_blank");
+    });
+
+    // Year
+    byId("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
