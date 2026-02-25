@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Servicios | Santiago Rodriguez</title>
+  <meta name="description" content="Demo premium de web institucional para servicios con CTA a WhatsApp." />
+  <style>
+    :root{
+      --bg:#fff; --text:#0b0b0c; --muted:#5b5f66; --muted2:#7a7f88;
+      --line:#e7e9ee; --soft:#f6f7f9; --shadow:0 12px 32px rgba(10,10,12,.06);
+      --r:16px; --r2:20px; --max:1140px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .header{position:sticky;top:0;z-index:80;background:#fff;border-bottom:1px solid var(--line)}
+    .header-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(180deg,#111,#333)}
+    .brand b{font-size:14px}
+    .brand span{display:block;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .nav a{padding:8px 10px;border-radius:10px}
+    .nav a:hover{background:var(--soft);color:var(--text)}
+    .btn{height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+    .btn:hover{background:var(--soft)}
+    .btn.primary{background:#0b0b0c;border-color:#0b0b0c;color:#fff}
+    .btn.primary:hover{background:#1a1a1c}
+    .hero{padding:44px 0 20px}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:stretch}
+    .card{border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--shadow);padding:18px;background:#fff}
+    .card.soft{background:var(--soft);box-shadow:none}
+    .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);background:var(--soft);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+    .dot{width:8px;height:8px;border-radius:999px;background:#111}
+    h1{margin:12px 0 10px;font-size:34px;letter-spacing:-.4px;line-height:1.1}
+    .sub{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .chip{font-size:12px;color:var(--muted);border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:999px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .feat{border:1px solid var(--line);border-radius:var(--r);padding:16px;background:#fff}
+    .feat b{display:block;margin-bottom:6px}
+    .feat p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+    .section{padding:22px 0}
+    .section h2{margin:0 0 8px;font-size:18px}
+    .lead{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.6}
+    .process{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .step{border:1px solid var(--line);border-radius:var(--r);padding:14px;background:#fff}
+    .num{font-weight:900;color:#0b0b0c;font-size:12px;border:1px solid var(--line);background:var(--soft);padding:6px 10px;border-radius:999px;display:inline-flex}
+    .step b{display:block;margin:10px 0 6px}
+    .step p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+    label{display:block;font-size:12px;font-weight:900;color:var(--muted);margin-bottom:6px}
+    input,textarea,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;outline:none}
+    input:focus,textarea:focus,select:focus{border-color:#b9bec9;box-shadow:0 0 0 4px rgba(10,10,12,.06)}
+    textarea{min-height:120px;resize:vertical}
+    .hint{font-size:12px;color:var(--muted);line-height:1.45;margin-top:8px}
+    footer{border-top:1px solid var(--line);margin-top:18px;padding:18px 0 26px;color:var(--muted2);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .float{position:fixed;right:16px;bottom:16px;z-index:120}
+    .float a{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:999px;background:#0b0b0c;color:#fff;font-weight:900;border:1px solid #0b0b0c;box-shadow:0 14px 38px rgba(10,10,12,.10)}
+    .ic{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12)}
+    @media(max-width:980px){
+      .hero-grid,.contact{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .process{grid-template-columns:1fr}
+      h1{font-size:30px}
+      .nav{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <b>Demo Servicios</b>
+          <span>Santiago Rodriguez · Programación Web</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="index.html">Volver</a>
+        <a class="btn primary" id="btnHeaderWa" href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="card">
+        <span class="kicker"><span class="dot"></span> Web institucional premium</span>
+        <h1>Tu negocio, presentado de forma seria y profesional</h1>
+        <p class="sub">
+          Demo ideal para negocios de servicios: seguridad, instalación, mantenimiento, logística, etc.
+          CTA fuerte a WhatsApp y formulario que arma el mensaje automáticamente.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" id="btnHeroWa" href="#">Solicitar presupuesto</a>
+          <a class="btn" href="#servicios">Ver servicios</a>
+        </div>
+
+        <div class="chips">
+          <span class="chip">Diseño formal</span>
+          <span class="chip">Optimizado para celular</span>
+          <span class="chip">CTA a WhatsApp</span>
+          <span class="chip">Formulario inteligente</span>
+        </div>
+      </div>
+
+      <aside class="card soft">
+        <h2 style="margin:0 0 8px;font-size:18px">Qué logra esta web</h2>
+        <p class="lead">
+          Convierte visitas en consultas con estructura simple y mensajes directos.
+        </p>
+
+        <div class="grid3" style="grid-template-columns:1fr;gap:10px">
+          <div class="feat">
+            <b>Credibilidad</b>
+            <p>Servicios + proceso + contacto. Todo claro y profesional.</p>
+          </div>
+          <div class="feat">
+            <b>Consultas rápidas</b>
+            <p>WhatsApp con mensaje listo, sin fricción.</p>
+          </div>
+          <div class="feat">
+            <b>Orden</b>
+            <p>El cliente entiende todo en segundos.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="servicios">
+  <div class="container">
+    <h2>Servicios</h2>
+    <p class="lead">Ejemplo de tarjetas (adaptables a cualquier rubro).</p>
+
+    <div class="grid3">
+      <div class="feat">
+        <b>Instalación</b>
+        <p>Implementación profesional con checklist, tiempos claros y garantía.</p>
+      </div>
+      <div class="feat">
+        <b>Mantenimiento</b>
+        <p>Soporte preventivo/correctivo para que todo funcione sin sorpresas.</p>
+      </div>
+      <div class="feat">
+        <b>Asesoramiento</b>
+        <p>Recomendación personalizada según tu necesidad y presupuesto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="proceso">
+  <div class="container">
+    <h2>Proceso de trabajo</h2>
+    <p class="lead">Sección que da mucha confianza al cliente.</p>
+
+    <div class="process">
+      <div class="step">
+        <span class="num">01</span>
+        <b>Relevamiento</b>
+        <p>Entiendo tu negocio, tu público y el objetivo.</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <b>Propuesta</b>
+        <p>Armo estructura, estilo y contenido. Todo claro.</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <b>Entrega</b>
+        <p>Publico y ajusto detalles. Queda lista para vender.</p>
+      </div>
+      <div class="step">
+        <span class="num">04</span>
+        <b>Soporte</b>
+        <p>Mantenimiento opcional y mejoras futuras.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contacto">
+  <div class="container">
+    <h2>Contacto</h2>
+    <p class="lead">Completa y se abre WhatsApp con mensaje armado.</p>
+
+    <div class="contact">
+      <div class="card">
+        <form id="form">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <label>Nombre</label>
+              <input id="nombre" required placeholder="Ej: Juan Pérez" />
+            </div>
+            <div>
+              <label>Rubro</label>
+              <input id="rubro" required placeholder="Ej: Seguridad / Instalación" />
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+            <div>
+              <label>Zona</label>
+              <input id="zona" placeholder="Ej: San Vicente" />
+            </div>
+            <div>
+              <label>Qué necesitás</label>
+              <select id="necesidad">
+                <option>Web institucional</option>
+                <option>Web + WhatsApp</option>
+                <option>Web + formulario</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label>Mensaje</label>
+            <textarea id="mensaje" placeholder="Contame brevemente qué querés lograr..."></textarea>
+          </div>
+
+          <button class="btn primary" style="width:100%;height:46px;border-radius:14px;margin-top:10px" type="submit">
+            Enviar por WhatsApp
+          </button>
+          <div class="hint">No se envía a ningún servidor: abre WhatsApp con el texto listo.</div>
+        </form>
+      </div>
+
+      <div class="card soft">
+        <h2 style="margin:0 0 8px;font-size:18px">Mensaje recomendado</h2>
+        <p class="lead">Así te llegan consultas completas y más fáciles de cerrar.</p>
+        <div class="feat" style="box-shadow:none">
+          <b>Tip de venta</b>
+          <p>Pedí siempre: rubro + zona + objetivo + ejemplo de lo que le gusta.</p>
+        </div>
+        <div class="cta" style="margin-top:12px">
+          <a class="btn primary" id="btnDirectWa" href="#">Escribir directo</a>
+          <a class="btn" href="index.html#portfolio">Ver más demos</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Demo Servicios</div>
+      <div>Santiago Rodriguez · Programación Web</div>
+    </footer>
+  </div>
+</section>
+
+<div class="float">
+  <a id="btnFloatWa" href="#"><span class="ic">💬</span>WhatsApp</a>
+</div>
+
+<script>
+  const WHATSAPP_NUMBER = "5491155034755";
+  const base = `https://wa.me/${WHATSAPP_NUMBER}?text=`;
+  function openWA(text){ window.open(base + encodeURIComponent(text), "_blank"); }
+
+  const general = "Hola Santiago! Vi la demo de Servicios y quiero una web institucional. Mi rubro es: _____. Zona: _____.";
+  document.getElementById("btnHeaderWa").href = base + encodeURIComponent(general);
+  document.getElementById("btnHeroWa").href   = base + encodeURIComponent(general);
+  document.getElementById("btnDirectWa").href = base + encodeURIComponent(general);
+  document.getElementById("btnFloatWa").href  = base + encodeURIComponent(general);
+
+  document.getElementById("form").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const nombre = document.getElementById("nombre").value.trim();
+    const rubro  = document.getElementById("rubro").value.trim();
+    const zona   = document.getElementById("zona").value.trim();
+    const necesidad = document.getElementById("necesidad").value;
+    const msg    = document.getElementById("mensaje").value.trim();
+
+    const text =
+      `Hola Santiago! Soy ${nombre}. Rubro: ${rubro}. Zona: ${zona || "—"}. ` +
+      `Necesito: ${necesidad}. ` + (msg ? `Detalle: ${msg}` : "");
+    openWA(text);
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo USD ⇄ ARS Automático | Santiago Rodriguez</title>
+  <meta name="description" content="Demo premium: catálogo con carga en USD o ARS y conversión automática al dólar oficial, panel tipo Excel." />
+  <style>
+    :root{
+      --bg:#fff; --text:#0b0b0c; --muted:#5b5f66; --muted2:#7a7f88;
+      --line:#e7e9ee; --soft:#f6f7f9; --shadow:0 12px 32px rgba(10,10,12,.06);
+      --r:16px; --r2:20px; --max:1140px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .header{position:sticky;top:0;z-index:80;background:#fff;border-bottom:1px solid var(--line)}
+    .header-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(180deg,#111,#333)}
+    .brand b{font-size:14px}
+    .brand span{display:block;font-size:12px;color:var(--muted)}
+    .btn{height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+    .btn:hover{background:var(--soft)}
+    .btn.primary{background:#0b0b0c;border-color:#0b0b0c;color:#fff}
+    .btn.primary:hover{background:#1a1a1c}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--line);background:var(--soft);padding:8px 10px;border-radius:999px;font-weight:900}
+    .wrap{padding:22px 0}
+    .card{border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--shadow);padding:18px;background:#fff}
+    .lead{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    h1{margin:0 0 8px;font-size:22px;letter-spacing:-.2px}
+    .top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:12px}
+    .rate{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    input,select{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;outline:none}
+    input:focus,select:focus{border-color:#b9bec9;box-shadow:0 0 0 4px rgba(10,10,12,.06)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .panel{border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--shadow);background:#fff;overflow:hidden}
+    .panel-h{padding:14px 16px;border-bottom:1px solid var(--line);background:var(--soft);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    table{width:100%;border-collapse:collapse;background:#fff}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;text-align:left}
+    th{background:#fafbfc;font-size:12px;color:#111}
+    tr:hover td{background:#fbfcff}
+    .td-actions{white-space:nowrap;text-align:right}
+    .mini{height:30px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:900;cursor:pointer}
+    .mini:hover{background:var(--soft)}
+    .mini.danger{border-color:#cfd3dc;color:#b00020}
+    .tag{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--soft);font-size:12px;font-weight:900;color:#111}
+    .float{position:fixed;right:16px;bottom:16px;z-index:120}
+    .float a{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:999px;background:#0b0b0c;color:#fff;font-weight:900;border:1px solid #0b0b0c;box-shadow:0 14px 38px rgba(10,10,12,.10)}
+    .ic{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12)}
+    footer{border-top:1px solid var(--line);margin-top:18px;padding:18px 0 26px;color:var(--muted2);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    @media(max-width:980px){ .grid2{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <b>Demo USD ⇄ ARS Automático</b>
+          <span>Panel tipo Excel + conversión al dólar oficial</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="index.html">Volver</a>
+        <a class="btn primary" id="btnHeaderWa" href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="container">
+    <div class="card">
+      <h1>Catálogo con carga en USD o ARS y conversión automática</h1>
+      <p class="lead">
+        Ideal para productos importados. Se actualiza con el dólar oficial (o manual si hace falta).
+        Los productos se guardan en el navegador (localStorage).
+      </p>
+
+      <div class="top">
+        <div class="rate">
+          <span class="pill">Fuente: <b id="rateSource">Cargando…</b></span>
+          <span class="pill">Dólar venta: <b id="rateValue">—</b></span>
+          <span class="pill">Actualizado: <b id="rateUpdated">—</b></span>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <input id="manualRate" type="number" min="0" step="0.01" placeholder="Dólar manual" />
+          <button class="btn" id="applyManual">Usar</button>
+          <button class="btn primary" id="addBtn">+ Agregar producto</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-h">
+          <b>Lista de productos (tipo Excel)</b>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <input id="q" placeholder="Buscar…" />
+            <button class="btn" id="export">Exportar CSV</button>
+            <button class="btn" id="clearAll">Borrar todo</button>
+          </div>
+        </div>
+
+        <table aria-label="Lista">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Moneda cargada</th>
+              <th>USD</th>
+              <th>ARS</th>
+              <th style="text-align:right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <div class="panel-h">
+          <b>Vista de venta</b>
+          <span class="tag">WhatsApp por producto</span>
+        </div>
+        <div style="padding:14px 16px">
+          <p class="lead" style="margin:0 0 10px">
+            Vista “cliente final”: producto + precio + botón de consulta.
+          </p>
+          <div id="sellList" style="display:grid;gap:10px"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Demo USD ⇄ ARS</div>
+      <div>Tip: esto vende mucho en rubros con precios en USD.</div>
+    </footer>
+  </div>
+</section>
+
+<div class="float">
+  <a id="btnFloatWa" href="#"><span class="ic">💬</span>WhatsApp</a>
+</div>
+
+<script>
+  const WHATSAPP_NUMBER = "5491155034755";
+  const DOLAR_API_URL = "https://dolarapi.com/v1/dolares/oficial";
+  const STORAGE_KEY = "demo_usd_ars_products_v1";
+
+  const nfARS = new Intl.NumberFormat("es-AR", { style:"currency", currency:"ARS", maximumFractionDigits: 2 });
+  const nfUSD = new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits: 2 });
+
+  let usdRate = null;
+  let rateMeta = { source:"—", updated:"—" };
+  let products = load();
+
+  function load(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }catch(e){ return []; } }
+  function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(products)); }
+  function uid(){ return Math.random().toString(16).slice(2) + Date.now().toString(16); }
+  function num(v){ const n = Number(v); return Number.isFinite(n) ? n : null; }
+  function formatRate(v){ return v ? (nfARS.format(v).replace("ARS","").trim() + " / USD") : "—"; }
+  function wa(text){ return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`; }
+
+  function recalcAll(){
+    products = products.map(p=>{
+      if(p.inputCurrency === "ARS"){
+        const usd = (usdRate && p.ars != null) ? (p.ars / usdRate) : null;
+        return { ...p, usd };
+      }else{
+        const ars = (usdRate && p.usd != null) ? (p.usd * usdRate) : null;
+        return { ...p, ars };
+      }
+    });
+    save();
+  }
+
+  function escapeHtml(s){
+    return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+
+  function render(){
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    const list = products.filter(p => !q || (p.name + " " + p.inputCurrency).toLowerCase().includes(q));
+
+    const tb = document.getElementById("tbody");
+    tb.innerHTML = "";
+    list.forEach(p=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${escapeHtml(p.name)}</td>
+        <td><span class="tag">${p.inputCurrency || "—"}</span></td>
+        <td>${p.usd == null ? "—" : nfUSD.format(p.usd)}</td>
+        <td>${p.ars == null ? "—" : nfARS.format(p.ars)}</td>
+        <td class="td-actions">
+          <button class="mini" onclick="editProduct('${p.id}')">Editar</button>
+          <button class="mini danger" onclick="delProduct('${p.id}')">Eliminar</button>
+        </td>
+      `;
+      tb.appendChild(tr);
+    });
+
+    const sell = document.getElementById("sellList");
+    sell.innerHTML = "";
+    list.slice(0, 6).forEach(p=>{
+      const box = document.createElement("div");
+      box.style.border = "1px solid var(--line)";
+      box.style.borderRadius = "16px";
+      box.style.padding = "12px";
+      box.style.background = "#fff";
+      box.style.boxShadow = "var(--shadow)";
+
+      const priceLine = `${p.usd == null ? "—" : nfUSD.format(p.usd)} · ${p.ars == null ? "—" : nfARS.format(p.ars)}`;
+      const link = wa(`Hola Santiago! Vi la demo USD⇄ARS y me interesa: ${p.name}. Precio: ${priceLine}. ¿Me pasás info?`);
+
+      box.innerHTML = `
+        <b style="display:block;margin-bottom:6px">${escapeHtml(p.name)}</b>
+        <div style="color:var(--muted);font-size:13px;margin-bottom:10px">${priceLine}</div>
+        <a class="btn primary" style="width:100%;height:42px;border-radius:14px" href="${link}" target="_blank">Consultar por WhatsApp</a>
+      `;
+      sell.appendChild(box);
+    });
+
+    document.getElementById("rateSource").textContent = rateMeta.source;
+    document.getElementById("rateValue").textContent = usdRate ? formatRate(usdRate) : "—";
+    document.getElementById("rateUpdated").textContent = rateMeta.updated || "—";
+  }
+
+  function openForm(existing){
+    const isEdit = !!existing;
+
+    const name = prompt("Nombre del producto:", existing?.name || "");
+    if(name === null) return;
+
+    const currency = prompt("Moneda cargada (USD o ARS):", existing?.inputCurrency || "USD");
+    if(currency === null) return;
+    const cur = (currency || "").trim().toUpperCase();
+    if(cur !== "USD" && cur !== "ARS"){ alert("Moneda inválida. Usá USD o ARS."); return; }
+
+    const priceStr = prompt(`Precio (${cur}):`, cur==="USD" ? (existing?.usd ?? "") : (existing?.ars ?? ""));
+    if(priceStr === null) return;
+    const price = num(priceStr);
+    if(price == null || price < 0){ alert("Precio inválido."); return; }
+
+    let usd = null, ars = null;
+    if(cur === "USD"){
+      usd = price;
+      ars = (usdRate ? usd * usdRate : null);
+    }else{
+      ars = price;
+      usd = (usdRate ? ars / usdRate : null);
+    }
+
+    if(isEdit){
+      const i = products.findIndex(p=>p.id===existing.id);
+      if(i>=0) products[i] = { ...products[i], name: name.trim(), inputCurrency: cur, usd, ars };
+    }else{
+      products.push({ id: uid(), name: name.trim(), inputCurrency: cur, usd, ars });
+    }
+
+    save();
+    render();
+  }
+
+  window.editProduct = (id)=>{
+    const p = products.find(x=>x.id===id);
+    if(!p) return;
+    openForm(p);
+  };
+  window.delProduct = (id)=>{
+    const p = products.find(x=>x.id===id);
+    if(!p) return;
+    if(!confirm(`¿Eliminar "${p.name}"?`)) return;
+    products = products.filter(x=>x.id!==id);
+    save();
+    render();
+  };
+
+  function exportCSV(){
+    const rows = [["Producto","Moneda cargada","USD","ARS"]];
+    products.forEach(p=>{
+      rows.push([
+        p.name,
+        p.inputCurrency || "",
+        p.usd == null ? "" : p.usd.toFixed(2),
+        p.ars == null ? "" : p.ars.toFixed(2)
+      ]);
+    });
+    const csv = rows.map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "productos_usd_ars.csv";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function fetchRate(){
+    try{
+      const res = await fetch(DOLAR_API_URL, { cache:"no-store" });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      const venta = Number(data.venta);
+      if(!Number.isFinite(venta) || venta <= 0) throw new Error("dato inválido");
+      usdRate = venta;
+      rateMeta.source = "DolarApi (Oficial)";
+      rateMeta.updated = data.fechaActualizacion ? new Date(data.fechaActualizacion).toLocaleString("es-AR") : "—";
+      recalcAll();
+      render();
+    }catch(e){
+      rateMeta.source = "Manual / Sin conexión";
+      rateMeta.updated = "—";
+      render();
+    }
+  }
+
+  function applyManual(){
+    const v = num(document.getElementById("manualRate").value);
+    if(v == null || v <= 0){ alert("Dólar manual inválido"); return; }
+    usdRate = v;
+    rateMeta.source = "Manual";
+    rateMeta.updated = new Date().toLocaleString("es-AR");
+    recalcAll();
+    render();
+  }
+
+  const general = wa("Hola Santiago! Vi la demo USD ⇄ ARS automática y quiero algo así para mi negocio.");
+  document.getElementById("btnHeaderWa").href = general;
+  document.getElementById("btnFloatWa").href  = general;
+
+  document.getElementById("addBtn").addEventListener("click", ()=>openForm(null));
+  document.getElementById("applyManual").addEventListener("click", applyManual);
+  document.getElementById("export").addEventListener("click", exportCSV);
+  document.getElementById("clearAll").addEventListener("click", ()=>{
+    if(!confirm("¿Borrar todos los productos?")) return;
+    products = [];
+    save();
+    render();
+  });
+  document.getElementById("q").addEventListener("input", render);
+
+  if(products.length === 0){
+    products = [
+      { id: uid(), name:"Producto Importado A", inputCurrency:"USD", usd: 49.90, ars: null },
+      { id: uid(), name:"Producto Importado B", inputCurrency:"USD", usd: 120.00, ars: null },
+      { id: uid(), name:"Servicio / Instalación", inputCurrency:"ARS", ars: 85000, usd: null },
+    ];
+    save();
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  fetchRate();
+  render();
+</script>
+</body>
+</html>

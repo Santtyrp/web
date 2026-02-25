@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Catálogo Pro | Santiago Rodriguez</title>
+  <meta name="description" content="Demo premium de catálogo con categorías, búsqueda y WhatsApp por producto." />
+  <style>
+    :root{
+      --bg:#fff; --text:#0b0b0c; --muted:#5b5f66; --muted2:#7a7f88;
+      --line:#e7e9ee; --soft:#f6f7f9; --shadow:0 12px 32px rgba(10,10,12,.06);
+      --r:16px; --r2:20px; --max:1140px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .header{position:sticky;top:0;z-index:80;background:#fff;border-bottom:1px solid var(--line)}
+    .header-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(180deg,#111,#333)}
+    .brand b{font-size:14px}
+    .brand span{display:block;font-size:12px;color:var(--muted)}
+    .btn{height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+    .btn:hover{background:var(--soft)}
+    .btn.primary{background:#0b0b0c;border-color:#0b0b0c;color:#fff}
+    .btn.primary:hover{background:#1a1a1c}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--line);background:var(--soft);padding:8px 10px;border-radius:999px;font-weight:800;cursor:pointer}
+    .pill.active{background:#0b0b0c;color:#fff;border-color:#0b0b0c}
+    .hero{padding:34px 0 12px}
+    .card{border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--shadow);padding:18px;background:#fff}
+    .lead{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    h1{margin:0 0 8px;font-size:26px;letter-spacing:-.3px}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:12px}
+    .search{flex:1;min-width:220px;display:flex;gap:10px;align-items:center}
+    input{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;outline:none}
+    input:focus{border-color:#b9bec9;box-shadow:0 0 0 4px rgba(10,10,12,.06)}
+    .cats{display:flex;gap:10px;flex-wrap:wrap}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .prod{border:1px solid var(--line);border-radius:var(--r2);background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    .img{height:140px;background:linear-gradient(180deg,#f3f4f6,#e8eaee);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:900;color:#111;font-size:12px;letter-spacing:.2px;text-transform:uppercase}
+    .body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .name{font-weight:900}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px}
+    .tag{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:6px 10px;font-weight:800}
+    .price{font-weight:900;font-size:18px}
+    .desc{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+    .actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+    footer{border-top:1px solid var(--line);margin-top:18px;padding:18px 0 26px;color:var(--muted2);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .float{position:fixed;right:16px;bottom:16px;z-index:120}
+    .float a{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 16px;border-radius:999px;background:#0b0b0c;color:#fff;font-weight:900;border:1px solid #0b0b0c;box-shadow:0 14px 38px rgba(10,10,12,.10)}
+    .ic{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12)}
+    @media(max-width:980px){ .grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <b>Demo Catálogo Pro</b>
+          <span>Santiago Rodriguez · Programación Web</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="index.html">Volver</a>
+        <a class="btn primary" id="btnHeaderWa" href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="card">
+      <h1>Catálogo premium con búsqueda y categorías</h1>
+      <p class="lead">
+        Ideal para vender por Instagram/WhatsApp. Cada producto tiene botón de consulta con mensaje automático.
+      </p>
+
+      <div class="toolbar">
+        <div class="search">
+          <input id="q" placeholder="Buscar producto… (ej: pala, mochila, combo)" />
+          <button class="btn" id="clear">Limpiar</button>
+        </div>
+
+        <div class="cats" id="cats"></div>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      <div>© <span id="year"></span> Demo Catálogo Pro</div>
+      <div>Tip: reemplazá nombres/etiquetas por el rubro real.</div>
+    </footer>
+  </div>
+</section>
+
+<div class="float">
+  <a id="btnFloatWa" href="#"><span class="ic">💬</span>WhatsApp</a>
+</div>
+
+<script>
+  const WHATSAPP_NUMBER = "5491155034755";
+  const wa = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
+  const PRODUCTS = [
+    { id:1, name:"Pala Carbon Pro X", cat:"Palas", price:"$ 189.900", tag:"Top", desc:"Balance medio, control y potencia. Ideal nivel intermedio/avanzado." },
+    { id:2, name:"Pala Control Elite", cat:"Palas", price:"$ 149.900", tag:"Control", desc:"Salida limpia y estabilidad. Excelente para defensa y precisión." },
+    { id:3, name:"Mochila Team Pro", cat:"Accesorios", price:"$ 79.900", tag:"Nuevo", desc:"Compartimento térmico + bolsillo zapatillas. Diseño sobrio." },
+    { id:4, name:"Overgrip Premium (x3)", cat:"Accesorios", price:"$ 9.900", tag:"Pack", desc:"Agarre firme y cómodo. Ideal para transpiración." },
+    { id:5, name:"Remera DryFit Minimal", cat:"Indumentaria", price:"$ 24.900", tag:"Calidad", desc:"Tela liviana. Corte clásico. Colores neutros." },
+    { id:6, name:"Combo Entreno", cat:"Promos", price:"$ 99.900", tag:"Oferta", desc:"Overgrip + protector + muñequera. Listo para jugar." },
+  ];
+
+  const allCats = ["Todas", ...Array.from(new Set(PRODUCTS.map(p => p.cat)))];
+  let activeCat = "Todas";
+
+  const catsEl = document.getElementById("cats");
+  const gridEl = document.getElementById("grid");
+  const qEl = document.getElementById("q");
+
+  function renderCats(){
+    catsEl.innerHTML = "";
+    allCats.forEach(c=>{
+      const b = document.createElement("button");
+      b.className = "pill" + (c===activeCat ? " active" : "");
+      b.textContent = c;
+      b.onclick = ()=>{ activeCat=c; render(); };
+      catsEl.appendChild(b);
+    });
+  }
+
+  function matches(p, q){
+    const s = (p.name + " " + p.cat + " " + p.tag + " " + p.desc).toLowerCase();
+    return s.includes(q.toLowerCase());
+  }
+
+  function render(){
+    renderCats();
+    const q = qEl.value.trim();
+    const list = PRODUCTS.filter(p => (activeCat==="Todas" || p.cat===activeCat) && (!q || matches(p,q)));
+
+    gridEl.innerHTML = "";
+    list.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "prod";
+      card.innerHTML = `
+        <div class="img">${p.cat}</div>
+        <div class="body">
+          <div class="name">${p.name}</div>
+          <div class="meta">
+            <span class="tag">${p.tag}</span>
+            <span style="color:#5b5f66">Categoría: <b>${p.cat}</b></span>
+          </div>
+          <div class="price">${p.price}</div>
+          <p class="desc">${p.desc}</p>
+          <div class="actions">
+            <a class="btn primary" href="${wa(`Hola Santiago! Vi la Demo Catálogo Pro y me interesa: ${p.name}. Precio: ${p.price}. ¿Me pasás info?`)}" target="_blank">
+              Consultar por WhatsApp
+            </a>
+            <button class="btn" onclick="alert('Acá podés abrir un detalle del producto (opcional).')">Ver detalle</button>
+          </div>
+        </div>
+      `;
+      gridEl.appendChild(card);
+    });
+
+    if(list.length===0){
+      gridEl.innerHTML = `<div class="card" style="grid-column:1/-1;">
+        <b>No hay resultados</b>
+        <p class="lead" style="margin-top:6px;">Probá otra categoría o buscá con otra palabra.</p>
+      </div>`;
+    }
+  }
+
+  document.getElementById("clear").onclick = ()=>{ qEl.value=""; render(); };
+  qEl.addEventListener("input", render);
+
+  const general = wa("Hola Santiago! Vi la Demo Catálogo Pro y quiero un catálogo con WhatsApp para mi negocio.");
+  document.getElementById("btnHeaderWa").href = general;
+  document.getElementById("btnFloatWa").href  = general;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  render();
+</script>
+</body>
+</html>	
